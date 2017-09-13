@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "214647159449",
+    "firebase_url": "https://color-hop-38085223.firebaseio.com",
+    "project_id": "color-hop-38085223",
+    "storage_bucket": "color-hop-38085223.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:214647159449:android:84211d9a27c576f5",
+        "android_client_info": {
+          "package_name": "com.multiplecodes.colorhop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "214647159449-mn5u0jq4r3tarqmr10m4lge1oe9s0b2m.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "214647159449-7lo95s4eg2cn6gl4lulqd8amnc5q9s4u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.multiplecodes.colorhop",
+            "certificate_hash": "e338be893aa64253057d5eda353171eba06d91a7"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAJKxn83lF6WoGD1Ni2urTdjCaMT1VYfUk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "214647159449-mn5u0jq4r3tarqmr10m4lge1oe9s0b2m.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "214647159449-4tsbf7q3s0qtbcj94gpgsvc05c52crvm.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.multiplecodes.colorhop"
+              }
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
