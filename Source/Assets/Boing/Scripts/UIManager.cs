@@ -73,7 +73,7 @@ public class UIManager : MonoBehaviour
 		callGameMode ();
 	}
 
-
+    //вынести параметры в класс/массив
 	public void UIController (bool isUIActive = true, bool isMainScreenActive = false, bool isBallScreenActive = false, bool isIAPBannerScreenActive = false,
 	                          bool isGiftScreenActive = false, bool isWheelOfFourtneScreenActive = false, bool isLevelUpScreenActive = false, bool isGameOverScreenActive = false, bool isLevelScreenActive = false, bool isGamePlayScreenActive = false)
 	{
@@ -82,30 +82,23 @@ public class UIManager : MonoBehaviour
 		txtMainGems.text = Util.GetDiamond ().ToString ();
 		txtBallGems.text = Util.GetDiamond ().ToString ();
 
-
 		if (isUIActive)
-			mainCamera.gameObject.SetActive (true);
+        {
+            mainCamera.gameObject.SetActive(true);
+        }
 		
 		UICanvas.SetActive (isUIActive);
 		MainScreen.SetActive (isMainScreenActive);
 		BallScreen.SetActive (isBallScreenActive);
-		if (isBallScreenActive)
-			BallLockedButton ();
+		if (isBallScreenActive) { BallLockedButton(); }
 		IAPBannerScreen.SetActive (isIAPBannerScreenActive);
 		GiftScreen.SetActive (isGiftScreenActive);
 		if (isGiftScreenActive) {
 			ActiveGift ();
 		}
-		WheelOfFourtneScreen.SetActive (isWheelOfFourtneScreenActive);
-
-		
+		WheelOfFourtneScreen.SetActive (isWheelOfFourtneScreenActive);		
 		LevelUpScreen.SetActive (isLevelUpScreenActive);
-
-
-
 		GameOverScreen.SetActive (isGameOverScreenActive);
-
-
 		LevelScreen.SetActive (isLevelScreenActive);
 		GamePlayScreen.SetActive (isGamePlayScreenActive);
 	}
@@ -150,6 +143,7 @@ public class UIManager : MonoBehaviour
 			//Night
 			DayNight.GetComponentsInChildren<Image> () [1].sprite = Resources.Load ("moon", typeof(Sprite)) as Sprite;
 			//Main Screen
+            //расширить Color, определить цвета
 			txtMainBest.color = new Color32 (0, 131, 91, 255);
 			txtMainBest2.color = new Color32 (0, 131, 91, 255);
 			txtMainGems.color = new Color32 (0, 131, 91, 255);
@@ -180,28 +174,29 @@ public class UIManager : MonoBehaviour
 		//FireBase 
 		FirebaseAnalytics.SetCurrentScreen ("GameMode_Button", this.name);
 		#endif
+        //отрефакторить
 		if (GameData.CurrentGameMode == 0) {
 			//Endless
 			GameMode.GetComponentsInChildren<Text> () [0].enabled = false;
 			GameMode.GetComponentsInChildren<Text> () [1].enabled = true;
-			GameMode.GetComponent<Image> ().sprite = Resources.Load ("Levels", typeof(Sprite)) as Sprite;
+			GameMode.GetComponent<Image> ().sprite = Resources.Load ("Career_btn", typeof(Sprite)) as Sprite;
 
 			//SetButton Property for Play Button
 			btnPlay.onClick.RemoveAllListeners ();
 			btnPlay.onClick.AddListener (OpenLevelList);
-			btnPlay.GetComponentInChildren<Text> ().text = "Career & Levels";
+			//btnPlay.GetComponentInChildren<Text> ().text = "Career & Levels";
 
 			GameData.CurrentGameMode = 1;
 		} else {
 			//Carrier Levels`
 			GameMode.GetComponentsInChildren<Text> () [0].enabled = true;
 			GameMode.GetComponentsInChildren<Text> () [1].enabled = false;
-			GameMode.GetComponent<Image> ().sprite = Resources.Load ("Endless", typeof(Sprite)) as Sprite;
+			GameMode.GetComponent<Image> ().sprite = Resources.Load ("Endless_btn", typeof(Sprite)) as Sprite;
 
 			//SetButton Property for Play Button
 			btnPlay.onClick.RemoveAllListeners ();
 			btnPlay.onClick.AddListener (PlayEndless);
-			btnPlay.GetComponentInChildren<Text> ().text = "Play";
+			//btnPlay.GetComponentInChildren<Text> ().text = "Play";
 		
 			GameData.CurrentGameMode = 0;
 		}
@@ -221,7 +216,7 @@ public class UIManager : MonoBehaviour
 		GameData.Levels = data.ToList ();
 		kProductIDLevels = new Dictionary<int,string> ();
 
-		int i = 0;
+		//int i = 0;
 
 
 		if (LevelContainer.transform.childCount < GameData.Levels.Count) {
@@ -235,6 +230,7 @@ public class UIManager : MonoBehaviour
 				NewLevelList.Add (NewLevel);
 				NewLevel.transform.SetParent (LevelContainer.transform);
 				NewLevel.GetComponent<RectTransform> ().localScale = Vector3.one;
+                //вынести в метод
 				Button LevelButton = NewLevel.GetComponentsInChildren<Button> () [0];
 				Button LockButton = NewLevel.GetComponentsInChildren<Button> () [1];
 				Text[] TxtLevelNo = NewLevel.transform.GetComponentsInChildren<Text> ();
@@ -277,6 +273,7 @@ public class UIManager : MonoBehaviour
 		//FireBase 
 		FirebaseAnalytics.SetCurrentScreen ("Levels_Target_Screen", this.name);
 		#endif
+        //вынести
 		InstructionScreen.SetActive (true);
 		InGems.SetActive (false);
 		InPoints.SetActive (false);
@@ -287,6 +284,7 @@ public class UIManager : MonoBehaviour
 		GameData.CurrentLevel = level;
 		Levels_Master LevelTargets = ds.GetSingleLevel ();
 		string msg = "";
+        //вынести в отдельные методы
 		if (LevelTargets.Point > 0) {
 			Debug.Log ("Point:" + LevelTargets.Point.ToString ());
 			InPoints.SetActive (true);
@@ -366,7 +364,7 @@ public class UIManager : MonoBehaviour
 		UiScreen.SetActive (false);
 		mainCamera.gameObject.SetActive (false);
 		if (GameData.isDay)
-			GameBG.GetComponent<Image> ().sprite = Resources.Load ("Day", typeof(Sprite)) as Sprite;
+			GameBG.GetComponent<Image> ().sprite = Resources.Load ("Autumn", typeof(Sprite)) as Sprite;
 		else
 			GameBG.GetComponent<Image> ().sprite = Resources.Load ("Night", typeof(Sprite)) as Sprite;
 		
@@ -438,7 +436,7 @@ public class UIManager : MonoBehaviour
 		FirebaseAnalytics.SetCurrentScreen ("Balls_Screen", this.name);
 		#endif
 		txtBallGems.text = Util.GetDiamond ().ToString ();
-
+        //разобраться с ообращениями по индексам
 		for (int i = 0; i < Balls.Length; i++) {
 			Button[] ballsButtons = Balls [i].GetComponentsInChildren<Button> ();
 			Button BtnBall = ballsButtons [0];
@@ -461,7 +459,7 @@ public class UIManager : MonoBehaviour
 			setBall (ballname, gems, BtnBall, false);
 		}
 	}
-
+    //параметры
 	void setBall (string BallName, int gems, Button balls, bool islocked)
 	{
 		balls.onClick.RemoveAllListeners ();
@@ -481,6 +479,7 @@ public class UIManager : MonoBehaviour
 				Util.SetDiamond (availableGems);
 				txtBallGems.text = Util.GetDiamond ().ToString ();
 				balls.gameObject.SetActive (false);
+                //повтор кода
 				BallMaterial.mainTexture = Resources.Load ("BallsImages/" + BallName, typeof(Texture)) as Texture;
 				CurrentBallImage.sprite = Resources.Load ("BallsImages/" + BallName, typeof(Sprite)) as Sprite;
 				PlayerPrefs.SetInt (BallName, 1);
@@ -532,6 +531,4 @@ public class UIManager : MonoBehaviour
 //			ads.GetComponent<UnityAdsInitializer> ().removeBanner ();
 		}
 	}
-
-
 }

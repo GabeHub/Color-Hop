@@ -9,7 +9,7 @@ using Firebase;
 using Firebase.Analytics;
 #endif
 
-
+//переименовать/вынести
 public class Diamond : MonoBehaviour
 {
 	public GameObject BtnWheel;
@@ -25,11 +25,11 @@ public class Diamond : MonoBehaviour
 		//Firebase
 		FirebaseAnalytics.SetCurrentScreen ("Wheel_Of_Fortune_Screen", this.name);
 		#endif
-		BtnWheel.GetComponent<Button> ().enabled = true;
-		BtnWheel.GetComponent<ConstantForce> ().enabled = false;
+		BtnWheel.GetComponent<Button>().enabled = true;
+		BtnWheel.GetComponent<ConstantForce>().enabled = false;
 		isWheelRunning = false;
-		BtnWheel.GetComponent<RectTransform> ().rotation = Quaternion.Euler (Vector3.zero);
-		oldGems = Util.GetDiamond ();
+		BtnWheel.GetComponent<RectTransform>().rotation = Quaternion.Euler (Vector3.zero);
+		oldGems = Util.GetDiamond();
 		txtGems.text = oldGems.ToString ();
 		LockedImage.SetActive (true);
 	}
@@ -37,8 +37,8 @@ public class Diamond : MonoBehaviour
 	void FixedUpdate ()
 	{
 		if (isWheelRunning) {
-			if (BtnWheel.GetComponent<ConstantForce> ().torque.z > 0) {
-				BtnWheel.GetComponent<ConstantForce> ().torque = new Vector3 (0, 0, BtnWheel.GetComponent<ConstantForce> ().torque.z - speed);
+			if (BtnWheel.GetComponent<ConstantForce>().torque.z > 0) {
+				BtnWheel.GetComponent<ConstantForce>().torque = new Vector3 (0, 0, BtnWheel.GetComponent<ConstantForce> ().torque.z - speed);
 			} else {
 				StartCoroutine ("UpdateGems");
 			}
@@ -51,9 +51,9 @@ public class Diamond : MonoBehaviour
 		//Firebase
 		FirebaseAnalytics.SetCurrentScreen ("Wheel_Of_Fortune_Button", this.name);
 		#endif
-		BtnWheel.GetComponent<Button> ().enabled = false;
-		BtnWheel.GetComponent<ConstantForce> ().enabled = true;
-		BtnWheel.GetComponent<ConstantForce> ().torque = new Vector3 (0, 0, UnityEngine.Random.Range (700, 1400));
+		BtnWheel.GetComponent<Button>().enabled = false;
+		BtnWheel.GetComponent<ConstantForce>().enabled = true;
+		BtnWheel.GetComponent<ConstantForce>().torque = new Vector3 (0, 0, UnityEngine.Random.Range (700, 1400));
 		isWheelRunning = true;
 	}
 
@@ -65,7 +65,7 @@ public class Diamond : MonoBehaviour
 
 	IEnumerator UpdateGems ()
 	{
-
+        //разобраться с паузами
 		isWheelRunning = false;
 		BtnWheel.GetComponent<ConstantForce> ().torque = Vector3.zero;
 
@@ -126,6 +126,4 @@ public class Diamond : MonoBehaviour
 			break;
 		}
 	}
-
-
 }

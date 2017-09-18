@@ -126,6 +126,8 @@ public class GameManager : MonoBehaviour
 
 	public Camera camGame;
 
+    public ParticleSystem ps;
+
 
 	void OnEnable ()
 	{
@@ -273,6 +275,7 @@ public class GameManager : MonoBehaviour
 			x = Input.mousePosition.x / Screen.width - 0.5f;
 		}
 
+        //сократить
 		if (x < -0.5f)
 			x = -0.5f;
 
@@ -289,10 +292,10 @@ public class GameManager : MonoBehaviour
 			pCam.z = playerParent.position.z - 8.63f;
 			camGame.transform.position = pCam;
 
-//			pCam = camGame.transform.position;
-//			pCam.z = playerParent.position.z - 8.63f;
-//			camGame.transform.position = pCam;
-		}
+            var pPs = ps.transform.position;
+            pPs.z = pCam.z + 10f;
+            ps.transform.position = pPs;
+        }
 	}
 
     //myFix
@@ -361,9 +364,7 @@ public class GameManager : MonoBehaviour
 
 	public void SpawnPlatform ()
 	{
-				
-		if (isGameOver)
-			return;
+        if (isGameOver) { return; }
 		GameObject go = null;
 
 		if (LevelDesignFormat [spawnPlatformCount] == 1) {
@@ -372,19 +373,15 @@ public class GameManager : MonoBehaviour
 			go.tag = "PlatformDouble";
 			PlatformsList.Add (go.gameObject);
 			SpawnPlatform (t [0].gameObject.transform, t [1].gameObject.transform, true);
-
 		} else {
 			go = Instantiate (platformPrefab) as GameObject;
 			Transform t1 = go.transform;
 			go.tag = "PlatformSingle";
 			PlatformsList.Add (go.gameObject);
-
 			SpawnPlatform (t1, null, false);
 		}
 
 		go.transform.SetParent (playerParent.transform.parent.gameObject.transform);
-
-
 	}
 
 
@@ -393,6 +390,7 @@ public class GameManager : MonoBehaviour
 		nextTilesCounter++;
 		GameObject NextTiles = null;
 
+        //сократить
 		if (nextTilesCounter == numberOfPlatformToSpawnedAtStart)
 			nextTilesCounter = 0;
 
@@ -402,14 +400,15 @@ public class GameManager : MonoBehaviour
 			NextTiles = PlatformsList [nextTilesCounter].GetComponentInChildren<Rigidbody> ().gameObject;
 			BallMaterial.color = NextTiles.GetComponent<MeshRenderer> ().material.color;
 		} else {
-			NextTiles = PlatformsList [nextTilesCounter].GetComponentsInChildren<Rigidbody> () [UnityEngine.Random.Range (0, 2)].gameObject;
+			NextTiles = PlatformsList [nextTilesCounter].GetComponentsInChildren<Rigidbody>() [UnityEngine.Random.Range (0, 2)].gameObject;
 			BallMaterial.color = NextTiles.GetComponent<MeshRenderer> ().material.color;
 		}
 
 		CancelInvoke ("setColor");
 	}
 
-	const float posXmax = 2.5f;
+    //вынести
+	const float posXmax = 3.0f;
 	//-2.5f;
 
 	public void SpawnPlatform (Transform t = null, Transform t2 = null, bool isDouble = false)
@@ -436,7 +435,8 @@ public class GameManager : MonoBehaviour
 //			colorIndex = UnityEngine.Random.Range (15, 19);
 //		} else {
 
-		Color gameColor;
+        //вынести в метод
+		Color gameColor = Color.black;
 		if (UIM.isColorTarget) {
 			if (point % 5 == 0) {
 				gameColor = UIM.mycolor;
@@ -466,7 +466,7 @@ public class GameManager : MonoBehaviour
 			t.parent.transform.position = new Vector3 (0, 0, spawnPlatformCount * 7.5f);
 			t.transform.localPosition = new Vector3 (posX, t.transform.position.y, 0);
 
-
+            //swicth
 			if (posX <= 0 && posX > -0.09f) {
 				posX = -posX + 2f;
 			} else if (posX <= 0 && posX > -1f) {
@@ -558,17 +558,11 @@ public class GameManager : MonoBehaviour
 			if (Physics.Raycast (playerSphere.position, down, out hit)) {
 				Platform platform = hit.transform.parent.GetComponent<Platform> ();
 
-
-				if (platform != null) {
-					
+				if (platform != null) {					
 					if (hit.transform.gameObject.GetComponent<MeshRenderer> ().material.color == BallMaterial.color) {
-
                         PlaySoundJump();
-
                         platform.OnPlayerBounce ();
-
 						Add1Point ();
-
 						// Set Color
 						Invoke ("setColor", 0.1f);
 
@@ -576,7 +570,7 @@ public class GameManager : MonoBehaviour
 					
 							GetComponent<CheckLevels> ().CheckHitForLevel (hit.transform.gameObject);
 						}
-
+                        //подумать
 					} else {
                         StartCoroutine ("TakeGameOverChance");
 					}
@@ -607,7 +601,7 @@ public class GameManager : MonoBehaviour
 				Advertisement.Show ("rewardedVideo", options);
 			}
 			GameOver ();
-		
+		//цикл/вынести
 		} else {
 			txtCounter.text = "5";
 			yield return new WaitForSeconds (1);
@@ -622,7 +616,7 @@ public class GameManager : MonoBehaviour
 			GameOver ();
 		}
 	}
-
+    //переименовать
 	public void takeChance ()
 	{
 		StopCoroutine ("TakeGameOverChance");
@@ -650,7 +644,8 @@ public class GameManager : MonoBehaviour
 		case ShowResult.Finished:
 			Debug.Log ("The ad was successfully shown.");
 			LifeChance.SetActive (false);
-			if (PlayerPrefs.GetInt ("GAMEOVER_COUNT", 0) == 3) {
+                //убрать 1 из строк PlayerPrefs.DeleteKey ("GAMEOVER_COUNT");
+            if (PlayerPrefs.GetInt ("GAMEOVER_COUNT", 0) == 3) {
 				PlayerPrefs.DeleteKey ("GAMEOVER_COUNT");
 				isGetChance = false;
 			} else {
@@ -673,6 +668,7 @@ public class GameManager : MonoBehaviour
 
 	void Add1Point ()
 	{
+        //сократить
 		if (isPause)
 			return;
 
@@ -703,15 +699,12 @@ public class GameManager : MonoBehaviour
 
 	public void Add1Alphabet (string text)
 	{
-
 		if (isPause)
 			return;
 
 		if (isGameOver)
 			return;
-
-
-
+        //сократить
 		if (GameData.CurrentGameMode == 0) {
 			
 			if (!GameData.FilledEndlessWord.Contains (text)) {
@@ -731,9 +724,6 @@ public class GameManager : MonoBehaviour
 		}
 
 		Debug.Log ("Char :  " + text + "  FilledLevelWord :" + GameData.FilledLevelWord);
-
-
-
 		PlaySoundDiamond ();
 	}
 
@@ -759,13 +749,13 @@ public class GameManager : MonoBehaviour
 			Util.setFilledEndlessWord (GameData.FilledLevelWord);
             //CancelInvoke ("StopGetSec");
             StopGetSec();
-
+            //вынести в метод
             //myFix
             DOTween.KillAll (false);
 			playerParent.DOKill (false);
 			playerSphere.DOKill (false);
 			shadow.DOKill (false);
-
+            //определить
 			#if AADOTWEEN
 			DOTween.KillAll (false);
 			playerParent.DOKill (false);
@@ -808,7 +798,7 @@ public class GameManager : MonoBehaviour
 
 	void ResetGame ()
 	{
-
+        //убрать проверку
 		if (PlatformsList.Count > 0) {
 			for (int i = 0; i < PlatformsList.Count; i++)
 				DestroyImmediate (PlatformsList [i].gameObject);
@@ -840,8 +830,4 @@ public class GameManager : MonoBehaviour
 		isGameOver = false;
 
 	}
-
-
-
-
 }

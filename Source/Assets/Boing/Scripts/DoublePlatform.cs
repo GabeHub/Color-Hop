@@ -19,7 +19,7 @@ public class DoublePlatform : MonoBehaviour
 	IEnumerator CoroutDestroyIfNotVisible ()
 	{
 		yield return new WaitForSeconds (1f);
-
+        //переделать
 		while (true) {
 	
 			if (gameManager.playerParent.transform.localPosition.z - this.transform.localPosition.z > 5) {
