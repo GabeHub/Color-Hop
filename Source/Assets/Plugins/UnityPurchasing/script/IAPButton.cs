@@ -101,9 +101,9 @@ namespace UnityEngine.Purchasing
 					IAPButtonStoreManager.Instance.ExtensionProvider.GetExtension<IMicrosoftExtensions>().RestoreTransactions();
 				} else if (Application.platform == RuntimePlatform.IPhonePlayer || Application.platform == RuntimePlatform.OSXPlayer || Application.platform == RuntimePlatform.tvOS) {
 					IAPButtonStoreManager.Instance.ExtensionProvider.GetExtension<IAppleExtensions>().RestoreTransactions(OnTransactionsRestored);
-				} else if (Application.platform == RuntimePlatform.Android && StandardPurchasingModule.Instance().androidStore == AndroidStore.SamsungApps) {
+				} else if (Application.platform == RuntimePlatform.Android && StandardPurchasingModule.Instance().appStore == AppStore.SamsungApps) {
 					IAPButtonStoreManager.Instance.ExtensionProvider.GetExtension<ISamsungAppsExtensions>().RestoreTransactions(OnTransactionsRestored);
-				} else if (Application.platform == RuntimePlatform.Android && StandardPurchasingModule.Instance().androidStore == AndroidStore.CloudMoolah) {
+				} else if (Application.platform == RuntimePlatform.Android && StandardPurchasingModule.Instance().appStore == AppStore.CloudMoolah) {
 					IAPButtonStoreManager.Instance.ExtensionProvider.GetExtension<IMoolahExtension>().RestoreTransactionID((restoreTransactionIDState) => {
 						OnTransactionsRestored(restoreTransactionIDState != RestoreTransactionIDState.RestoreFailed && restoreTransactionIDState != RestoreTransactionIDState.NotKnown);
 					});
@@ -176,8 +176,7 @@ namespace UnityEngine.Purchasing
 
 				ConfigurationBuilder builder = ConfigurationBuilder.Instance(module);
 
-                //Crashed after update
-			    //IAPConfigurationHelper.PopulateConfigurationBuilder(ref builder, catalog);
+				IAPConfigurationHelper.PopulateConfigurationBuilder(ref builder, catalog);
 
 				UnityPurchasing.Initialize (this, builder);
 			}

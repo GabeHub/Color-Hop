@@ -351,7 +351,7 @@ public class IAPDemo : MonoBehaviour, IStoreListener
         // This enables the Microsoft IAP simulator for local testing.
         // You would remove this before building your release package.
         builder.Configure<IMicrosoftConfiguration>().useMockBillingSystem = true;
-        m_IsGooglePlayStoreSelected = Application.platform == RuntimePlatform.Android && module.androidStore == AndroidStore.GooglePlay;
+        m_IsGooglePlayStoreSelected = Application.platform == RuntimePlatform.Android && module.appStore == AppStore.GooglePlay;
 
         // CloudMoolah Configuration setings
         // All games must set the configuration. the configuration need to apply on the CloudMoolah Portal.
@@ -365,14 +365,14 @@ public class IAPDemo : MonoBehaviour, IStoreListener
         // This records whether we are using Cloud Moolah IAP.
         // Cloud Moolah requires logging in to access your Digital Wallet, so:
         // A) IAPDemo (this) displays the Cloud Moolah GUI button for Cloud Moolah
-        m_IsCloudMoolahStoreSelected = Application.platform == RuntimePlatform.Android && module.androidStore == AndroidStore.CloudMoolah;
+        m_IsCloudMoolahStoreSelected = Application.platform == RuntimePlatform.Android && module.appStore == AppStore.CloudMoolah;
 
         // UnityChannel, provides access to Xiaomi MiPay.
 	    // Products are required to be set in the IAP Catalog window.  The file "MiProductCatalog.prop"
         // is required to be generated into the project's
         // Assets/Plugins/Android/assets folder, based off the contents of the
         // IAP Catalog window, for MiPay.
-        m_IsUnityChannelSelected = Application.platform == RuntimePlatform.Android && module.androidStore == AndroidStore.XiaomiMiPay;
+        m_IsUnityChannelSelected = Application.platform == RuntimePlatform.Android && module.appStore == AppStore.XiaomiMiPay;
         // UnityChannel supports receipt validation through a backend fetch.
         builder.Configure<IUnityChannelConfiguration>().fetchReceiptPayloadOnPurchase = m_FetchReceiptPayloadOnPurchase;
 
@@ -452,7 +452,7 @@ public class IAPDemo : MonoBehaviour, IStoreListener
         // displays a blocking Android Activity, so:
         // A) Unity IAP does not automatically restore purchases on Samsung Galaxy Apps
         // B) IAPDemo (this) displays the "Restore" GUI button for Samsung Galaxy Apps
-        m_IsSamsungAppsStoreSelected = Application.platform == RuntimePlatform.Android && module.androidStore == AndroidStore.SamsungApps;
+        m_IsSamsungAppsStoreSelected = Application.platform == RuntimePlatform.Android && module.appStore == AppStore.SamsungApps;
 
 
         // This selects the GroupId that was created in the Tizen Store for this set of products

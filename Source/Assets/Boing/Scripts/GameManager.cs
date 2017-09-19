@@ -126,10 +126,11 @@ public class GameManager : MonoBehaviour
 
 	public Camera camGame;
 
-    public ParticleSystem ps;
+    public ParticleSystem ps1;
+    public ParticleSystem ps2;
 
 
-	void OnEnable ()
+    void OnEnable ()
 	{
 
 		playerParent.parent.gameObject.SetActive (true);
@@ -292,9 +293,13 @@ public class GameManager : MonoBehaviour
 			pCam.z = playerParent.position.z - 8.63f;
 			camGame.transform.position = pCam;
 
-            var pPs = ps.transform.position;
-            pPs.z = pCam.z + 10f;
-            ps.transform.position = pPs;
+            var pPs1 = ps1.transform.position;
+            pPs1.z = pCam.z + 10f;
+            ps1.transform.position = pPs1;
+
+            var pPs2 = ps2.transform.position;
+            pPs2.z = pCam.z + 10f;
+            ps2.transform.position = pPs2;
         }
 	}
 
@@ -408,7 +413,7 @@ public class GameManager : MonoBehaviour
 	}
 
     //вынести
-	const float posXmax = 3.0f;
+	const float posXmax = 2.5f;
 	//-2.5f;
 
 	public void SpawnPlatform (Transform t = null, Transform t2 = null, bool isDouble = false)

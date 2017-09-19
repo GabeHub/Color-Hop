@@ -303,8 +303,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1453013493112936}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.61, z: 0}
-  m_LocalScale: {x: 2.2, y: 2.2, z: 0.3}
+  m_LocalPosition: {x: 0, y: -0.692, z: 0}
+  m_LocalScale: {x: 2.2000067, y: 2.1999998, z: 0.21201743}
   m_Children: []
   m_Father: {fileID: 4672277865709238}
   m_RootOrder: 1
@@ -342,8 +342,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1549991225617714}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.63, z: 0}
-  m_LocalScale: {x: 2, y: 0.15316302, z: 2}
+  m_LocalPosition: {x: 0, y: -0.601, z: 0}
+  m_LocalScale: {x: 2, y: 0.1479808, z: 2}
   m_Children: []
   m_Father: {fileID: 4267402524921050}
   m_RootOrder: 1
@@ -495,7 +495,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: df2f0db168672124a93109e19f2db3dc, type: 3}
+  - {fileID: 2100000, guid: 632064964da428541a0992d6480b01d5, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -623,7 +623,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: df2f0db168672124a93109e19f2db3dc, type: 3}
+  - {fileID: 2100000, guid: 632064964da428541a0992d6480b01d5, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -846,8 +846,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.0000001, y: 1.9999999, z: 1.0000002}
-  m_Center: {x: 0.000000059604645, y: -0.0000019073486, z: -0.00000008940697}
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!95 &95410812558992838
 Animator:
   serializedVersion: 3
@@ -927,16 +927,16 @@ TextMesh:
   m_OffsetZ: 0
   m_CharacterSize: 0.1
   m_LineSpacing: 1
-  m_Anchor: 4
+  m_Anchor: 1
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 147
+  m_FontSize: 88
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 12800000, guid: df2f0db168672124a93109e19f2db3dc, type: 3}
+  m_Font: {fileID: 12800000, guid: 632064964da428541a0992d6480b01d5, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 4279834905
 --- !u!102 &102553832986546362
 TextMesh:
   serializedVersion: 3
@@ -948,16 +948,16 @@ TextMesh:
   m_OffsetZ: 0
   m_CharacterSize: 0.1
   m_LineSpacing: 1
-  m_Anchor: 4
+  m_Anchor: 1
   m_Alignment: 1
   m_TabSize: 4
-  m_FontSize: 147
+  m_FontSize: 88
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 12800000, guid: df2f0db168672124a93109e19f2db3dc, type: 3}
+  m_Font: {fileID: 12800000, guid: 632064964da428541a0992d6480b01d5, type: 3}
   m_Color:
     serializedVersion: 2
-    rgba: 4278190080
+    rgba: 4279374354
 --- !u!114 &114185191344710042
 MonoBehaviour:
   m_ObjectHideFlags: 1
